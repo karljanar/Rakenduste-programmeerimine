@@ -1,25 +1,23 @@
 
+import { Route } from 'react-router';
 import './App.css';
-import Item from './components/Item'
+import Home from './pages/Home';
+import Cart from './pages/Cart';
+import AddItem from './pages/AddItem';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        
-        <p>
-         hello
-        </p>
-        <Item />
-        {/* <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a> */}
-      </header>
+    <div className="App-header">
+      <Route path="/" exact>
+        <Home />
+      </Route>
+      <Route path="/cart">
+        <Cart />
+      </Route>
+      <Route path="/add-item">
+        <AddItem />
+      </Route>
     </div>
   );
 }
