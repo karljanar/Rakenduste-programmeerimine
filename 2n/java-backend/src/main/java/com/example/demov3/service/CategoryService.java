@@ -2,9 +2,7 @@ package com.example.demov3.service;
 
 
 import com.example.demov3.model.Category;
-import com.example.demov3.model.Item;
 import com.example.demov3.repository.CategoryRepository;
-import com.example.demov3.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +15,11 @@ public class CategoryService {
     CategoryRepository categoryRepository;
 
 
-    public List<Item> getCategories(){
+    public List<Category> getCategories(){
         return categoryRepository.findAll();
     }
 
-    public void saveCategory(Item category) {
+    public void saveCategory(Category category) {
         categoryRepository.save(category);
     }
 
@@ -29,10 +27,6 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-
-//    public void patchItem(Item price, Long id) {
-//        itemRepository.update(price, id);
-//    }
 
     //delete
     //edit

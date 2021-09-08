@@ -1,8 +1,9 @@
 package com.example.demov3.controller;
 
-import com.example.demov3.model.Item;
+import com.example.demov3.model.Category;
+
 import com.example.demov3.service.CategoryService;
-import com.example.demov3.service.ItemService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +15,14 @@ public class CategoryController {
     @Autowired
     CategoryService categoryService;
     @GetMapping ("category")
-    public List<Item> getCategory() {
+    public List<Category> getCategory() {
         return categoryService.getCategories();
     }
 
     @PostMapping("category")
-    public String postItems(@RequestBody Item category ) {
+    public String postItems(@RequestBody Category category ) {
         categoryService.saveCategory(category);
-        return "working " + category.getName();
+        return "Saved " + category.getName();
     }
 
 //    @PatchMapping("items")
