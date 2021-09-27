@@ -1,6 +1,6 @@
 import './AddItemForm.css'
-import {useRef} from 'react';
-
+import { useState, useEffect, useRef } from 'react';
+import CategoryList from './CategoryList';
 
 function AddItemForm(props){
 
@@ -22,6 +22,26 @@ const categoryInputRef = useRef();
         props.onAddItem(item);
     }
 
+    const [isLoading, setIsLoading] = useState(true);
+    const [loadedCategories, setloadedCategories] = useState([]);
+
+    useEffect(() => {
+        fetch('http://localhost:8080/category').then(res => {
+            return res.json();
+        }).then((data) => {
+            console.log(data);
+            setIsLoading(false);
+            setloadedCategories(data);
+        });
+        
+    },[]);
+
+    if(isLoading){
+        return(
+            <div>Laeb...</div>
+        );
+    }
+
     return (
         <form onSubmit={formSubmitHandler}>
             <label>Eseme nimi</label><br />
@@ -29,7 +49,7 @@ const categoryInputRef = useRef();
             <label>Eseme hind</label><br />
             <input type="number" placeholder="Hind" required ref={priceInputRef} /><br/>
             <label>Eseme kategooria</label><br />
-            <input type="text" required ref={categoryInputRef} /><br/>
+            <CategoryList items={loadedCategories} categoryInputRef={categoryInputRef} />
             <button>Sisesta uus ese</button>
         </form>
         

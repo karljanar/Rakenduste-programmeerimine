@@ -1,6 +1,5 @@
 
 import { Link } from 'react-router-dom';
-import Item from './../components/Item'
 import ItemList from './../components/ItemList'
 import { useState, useEffect } from 'react';
 
@@ -19,6 +18,7 @@ function Home(){
             setIsLoading(false);
             setLoadedItems(data);
         });
+        
     },[]);
 
     if(isLoading){

@@ -22,7 +22,6 @@ public class Category {
     private Long id;
     private String name;
     private CategoryType category;
-
 }
 
 enum CategoryType {

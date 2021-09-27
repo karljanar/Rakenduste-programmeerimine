@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Cart from './pages/Cart';
 import AddItem from './pages/AddItem';
 import Navbar from './components/Navbar';
+import AddCategory from './pages/AddCategory';
 
 function App() {
   return (
@@ -19,8 +20,10 @@ function App() {
       <Route path="/add-item">
         <AddItem />
       </Route>
+      <Route path="/add-cat">
+        <AddCategory />
+      </Route>
     </div>
-   
   );
 }
 

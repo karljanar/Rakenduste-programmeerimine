@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CategoryController {
 
     @Autowired
@@ -20,7 +21,7 @@ public class CategoryController {
     }
 
     @PostMapping("category")
-    public String postItems(@RequestBody Category category ) {
+    public String postCategory(@RequestBody Category category ) {
         categoryService.saveCategory(category);
         return "Saved " + category.getName();
     }
