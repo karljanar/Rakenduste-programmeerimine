@@ -1,0 +1,24 @@
+.navbar{
+    background-color:#282c34;
+    height: 150px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+}
+
+.logo{
+    height: 90px;
+    margin: 25px;
+}
+
+.cart{
+    height: 50px;
+    margin: 50px;
+}
+
+.category{
+    width:80%;
+    margin:50px;
+    height: 50px;
+    
+}
