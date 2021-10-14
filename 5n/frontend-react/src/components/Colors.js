@@ -1,11 +1,7 @@
-import { useState, React } from "react"
+import { React } from "react"
 
 const Colors = (props) => {
-  const [counter, setCounter] = useState(0)
-  const [info, setInfo] = useState("no info")
-  const [loading, setLoading] = useState(false)
 
-  
   let textColorStyle = {
     color: props.textColor
     
