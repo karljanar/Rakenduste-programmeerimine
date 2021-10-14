@@ -29,6 +29,5 @@ const Squared = () => {
     </>
   )
 }
-// event => setResult(event.target.value**2)
 
 export default Squared
