@@ -45,9 +45,9 @@ const categoryInputRef = useRef();
     return (
         <form onSubmit={formSubmitHandler}>
             <label>Eseme nimi</label><br />
-            <input type="text" placeholder="Nimi" required ref={nameInputRef} /><br/>
+            <input type="text" required ref={nameInputRef} /><br/>
             <label>Eseme hind</label><br />
-            <input type="number" placeholder="Hind" required ref={priceInputRef} /><br/>
+            <input type="number"  required ref={priceInputRef} /><br/>
             <label>Eseme kategooria</label><br />
             <CategoryList items={loadedCategories} categoryInputRef={categoryInputRef} />
             <button>Sisesta uus ese</button>

@@ -22,7 +22,7 @@ const categoryInputRef = useRef();
     return (
         <form onSubmit={formSubmitHandler}>
             <label>Kategooria nimi</label><br />
-            <input type="text" placeholder="Nimi" required ref={nameInputRef} /><br/>
+            <input type="text" required ref={nameInputRef} /><br/>
             <label>Kategooria tüüp</label><br />
             <select ref={categoryInputRef}>
                 <option key="1" value="BASIC">BASIC</option>

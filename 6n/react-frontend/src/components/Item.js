@@ -2,10 +2,11 @@
 
 function Item(props){
     return(
-        <div>
-            <div className="itemName">{props.name}</div>
-            <div className="itemPrice">{props.price}</div>
-            <div className="itemCategory">{props.category}</div>
+        <div className="itemList">
+            
+            <div className="itemName">Eseme nimetus - {props.name}</div>
+            <div className="itemPrice">Eseme hind - {props.price}</div>
+            <div className="itemCategory">Eseme kategooria - {props.category}</div>
         </div>
     )
 }

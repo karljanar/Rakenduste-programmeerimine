@@ -1,4 +1,23 @@
-h1 {
+
+body{
+  color: #282c34;
   text-align: center;
+  background: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+}
+
+button{
+  border-radius: 15%;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  position: relative;
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  background-color: #282c34;
+  padding: 17px 60px;
+  margin: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.20);
 }
 

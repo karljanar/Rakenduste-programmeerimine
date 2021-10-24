@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 
 
+
 function Home(){
 
     const [isLoading, setIsLoading] = useState(true);
@@ -35,7 +36,10 @@ function Home(){
                 </button>
             </Link>
             <p></p>
+
             <ItemList items={loadedItems} />
+
+            
             
             
         </div>

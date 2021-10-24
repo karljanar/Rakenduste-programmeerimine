@@ -1,15 +1,18 @@
 import Item from './Item';
+import './ItemList.css';
 
 
 function ItemList(props){
 
     return(
-        <div>
+        <div >
             {props.items.map(item => (
                 <Item key={item.key} 
+                
                 name={item.name} 
                 price={item.price} 
-                category={item.category}/>
+                category={item.category}
+                />
             )
                 )}
             
