@@ -1,0 +1,14 @@
+.itemList{
+    text-align: center;
+    border-radius: 5%;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    color: #fff;
+    font-weight: 600;
+    font-size: 20px;
+    background-color: #282c34c5;
+    padding: 17px 60px;
+    margin: 10px;
+}

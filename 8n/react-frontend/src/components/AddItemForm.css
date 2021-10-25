@@ -1,0 +1,36 @@
+form {
+    text-align: center;
+    border-radius: 5%;
+    border: none;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    background-color: #282c34c5;
+    padding: 17px 60px;
+    margin: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.20);
+}
+
+label{
+    font-size: 20px;
+}
+
+input{
+    width: 25%;
+    font-size: 25px;
+    margin: 10px;
+    
+}
+
+select{
+    width: 25%;
+    border: none;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+    background-color: #fff;
+}

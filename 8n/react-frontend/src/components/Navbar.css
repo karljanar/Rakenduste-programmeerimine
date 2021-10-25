@@ -1,0 +1,34 @@
+.navbar{
+    margin: 5px;
+    background-color:#282c34;
+    height: 80px;
+    color: #000;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10%;
+    border: none;
+    
+}
+
+.logo{
+    height: 90px;
+    margin: -16px;
+}
+
+.cart{
+    height: 50px;
+    margin: 15px;
+}
+
+.category{
+    width:80%;
+    margin:15px;
+    height: 50px;
+    
+}
+
+.adminBut{
+    color:red !important;
+    border-style:  solid;
+    border-color: red !important;
+}
