@@ -11,7 +11,6 @@ function Posts(props){
 
   useEffect(() => {
     fetch('http://localhost:8081/api/post').then(res => {
-      console.log(res)
         return res.json();
     }).then((data) => {
         setIsLoading(false);
@@ -39,13 +38,11 @@ function Posts(props){
       body: postBody,
       user: props.user.id
     }
-    console.log(JSON.stringify(newPost));
     fetch('http://localhost:8081/api/post/create', {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(newPost),
     } ).then(res => {
-    console.log(res)
     setPostLength(postLength + 1)
     })
     }
