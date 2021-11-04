@@ -43,8 +43,6 @@ function ShowMagic() {
       <Colors textColor="black" />
       <Colors textColor="violet" />
       <hr />
-
-
     </div>
   );
 }

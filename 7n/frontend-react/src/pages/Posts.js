@@ -1,63 +1,96 @@
 import { useContext, useState, useRef, useEffect } from "react"
 import { Context } from "../store"
 import { addPost, removePost, updatePosts } from "../store/actions"
+import { Form, Input, Button } from 'antd';
+import { DeleteFilled } from '@ant-design/icons';
 
 function Posts(){
-  const [title, setTitle] = useState("")
-  const [state, dispatch] = useContext(Context)
-  const inputRef = useRef(null)
+  const [postBody, setPostBody] = useState("");
+  const inputRef = useRef(null);
+  const [form] = Form.useForm();
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadedPosts, setLoadedPost] = useState([]);
+  const [postLength, setPostLength] = useState(0);
+
+  useEffect(() => {
+    fetch('http://localhost:8081/api/post').then(res => {
+      console.log(res)
+        return res.json();
+    }).then((data) => {
+        console.log(data);
+        setIsLoading(false);
+        setLoadedPost(data);
+    });
+  },[postLength]);
 
 
-    useEffect(()=>{
-        dispatch(updatePosts([{
-            id: Date.now(),
-            title: "test"
-        },
-        {
-            id: Date.now(),
-            title: "test"
-        },
-        {
-            id: Date.now(),
-            title: "test"
-        },
-        ]))
-    }, [])
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        addNewPost()
-        setTitle("")
-        
-        if (inputRef.current) inputRef.current.focus()
-        }
+  function removePost(id){
+    const userId = "6182d9721810c99d4629f315";
+    fetch(`http://localhost:8081/api/post/delete/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    });
+    setPostLength(postLength + 1)
+
+  }
+
+  const handleSubmit = e => {
+      addNewPost();
+      form.resetFields();
+
+      }
 
 
 
   const addNewPost = () => {
 
     const newPost = {
-        id: Date.now(),
-        title
-      }
+      body: postBody,
+      user: "6182d9721810c99d4629f315"
+    }
+    console.log(JSON.stringify(newPost));
+    fetch('http://localhost:8081/api/post/create', {
+      method: "POST",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(newPost),
+    } ).then(res => {
+    console.log(res)
+    setPostLength(postLength + 1)
+      // return res.json();
+    })
+    }
   
-      dispatch(addPost(newPost))
+  if(isLoading){
+    return(
+        <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    );
   }
-  
-  console.log({ inputRef })
 
   return (
     <div style={{ textAlign: "center" }}>
-      <h1>Posts</h1>
-      <form onSubmit={handleSubmit}>
-        <input ref={inputRef} type="text" value={title} onChange={e => setTitle(e.target.value)} autoFocus/>
-        <button type="submit">Submit</button>
-      </form>
-
-      { state.posts.data.map(e => <li key={e.id}>{e.id} {e.title}  
-      <span style={{cursor: "pointer" }} onClick={() => dispatch(removePost(e.id))}>&#128540;</span>
-      </li>) }
-
+    <Form
+      form = {form}
+      onFinish={handleSubmit}>
+      <Form.Item
+        name="Post"
+        rules={[{ required: true, message: 'This field is required!' }]}
+      >
+      <Input 
+        placeholder="Post" 
+        ref={inputRef} type="text" 
+        value={postBody} 
+        onChange={e => setPostBody(e.target.value)} />
+    </Form.Item>
+    <Form.Item>
+      <Button type="primary" htmlType="submit">
+        Tra toota nuud
+      </Button>
+    </Form.Item>
+  </Form>
+      { loadedPosts.map(e => <li key={e._id}>{e._id} {e.body} | Posted by:   
+      <span style={{cursor: "pointer" }} onClick={() => removePost(e._id)}
+        ><DeleteFilled /> tra vardjas ei toota ju
+      </span></li>) }
     </div>
   )
 }

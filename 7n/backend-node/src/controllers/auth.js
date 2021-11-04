@@ -4,7 +4,8 @@ const User = require('../models/User')
 
 exports.login = async (req, res) => {
     const {email, password} = req.body
-
+    console.log('-----------')
+    console.log(email)
     try {
         const user = await User.findOne({email})
         if(!user) throw Error("User not found")
@@ -64,3 +65,7 @@ exports.signup = async (req, res) => {
         res.status(400).json({error: e.message})
     }
 }
+
+// exports.getUser = async (req, res) => {
+//     const {userId}
+// }
