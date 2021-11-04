@@ -11,34 +11,32 @@ import { Layout } from 'antd';
 
 
 function App() {
-  const [user, setUser] = useState();
+    const [user, setUser] = useState();
+    console.log(user)
+    const {Content} = Layout;
 
-  console.log(user)
 
-  const {Content} = Layout;
-  return (
+    return (
     <BrowserRouter>
-      <Header user={user} />
-      <Layout className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
-      <div className="site-layout-background" style={{  padding: 24, minHeight:"calc(100vh - 200px)" }}>
-      <Content style={{ padding: '0 24px' }}>
-      
+        <Header user={user} />
+        <Layout className="site-layout" style={{ padding: '0 50px', marginTop: 64 }}>
+        <div className="site-layout-background" style={{  padding: 24, minHeight:"calc(100vh - 200px)" }}>
+        <Content style={{ padding: '0 24px' }}>
+        
             <Switch>
-              <Route exact path="/">
+                <Route exact path="/">
                 <Posts user={user}/>
-              </Route>
-              <Route exact path="/login"  >
+                </Route>
+                <Route exact path="/login"  >
                 <Login setUser={setUser} />
-              </Route>
-              <Route exact path="/register" component={Register} />
+                </Route>
+                <Route exact path="/register" component={Register} />
             </Switch>
         </Content>
-      </div>
-      
-        
-      </Layout>
+        </div>
+        </Layout>
     </BrowserRouter>
-  );
+    );
 }
 
 export default App;
