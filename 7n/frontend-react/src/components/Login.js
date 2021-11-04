@@ -1,24 +1,26 @@
-import { Form, Input, Button, Checkbox } from 'antd';
-import React, { useContext, useState, useRef, useEffect  } from 'react';
+import { Form, Input, Button } from 'antd';
+import React, {  useState } from 'react';
 import PropTypes from 'prop-types';
 
-export default function Login({setToken}){
+
+
+export default function Login({setUser}){
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
 
+  const [error, setError] = useState("");
+  
 
   async function loginUser(credentials) {
-    return fetch('http://localhost:8081/api/auth/login', {
+    const response = await fetch('http://localhost:8081/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(credentials)
     })
-    .then((data) => {
-      console.log(data);
-      
-  });
+    const data = await response.json();
+    return data
   }
 
 
@@ -28,12 +30,19 @@ export default function Login({setToken}){
         email,
         password
       });
-      console.log(JSON.stringify(token))
-      setToken(token);
+      if(token.token) {
+        setUser(token);
+        setError("")
+      }else if(token.error){
+        setError(token.error)
+      } else {
+        setError(token.msg['0'].msg)
+      }
     };
     
 
     return(
+      <>
         <Form
       labelCol={{ span: 6 }}
       wrapperCol={{ span: 14 }}
@@ -41,6 +50,7 @@ export default function Login({setToken}){
       onFinish={onFinish}
       autoComplete="off"
     >
+      <div style={{textAlign: "center", color:"red"}}>{error}</div>
       <Form.Item
         label="Email"
         name="email"
@@ -57,19 +67,16 @@ export default function Login({setToken}){
         <Input.Password onChange={e => setPassword(e.target.value)} />
       </Form.Item>
 
-      {/* <Form.Item name="remember" valuePropName="checked" wrapperCol={{ offset: 8, span: 16 }}>
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item> */}
-
       <Form.Item wrapperCol={{ offset: 12, span: 16 }}>
         <Button type="primary" htmlType="submit">
           Login
         </Button>
       </Form.Item>
     </Form>
+    </>
   );
 }
 
 Login.propTypes = {
-  setToken: PropTypes.func.isRequired
+  setUser: PropTypes.func.isRequired
 };

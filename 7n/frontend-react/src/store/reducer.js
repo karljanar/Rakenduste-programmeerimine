@@ -1,4 +1,4 @@
-import { POST_ADD, POST_REMOVE, USER_LOGIN, USER_LOGOUT } from "./actions";
+import { POST_ADD, POST_REMOVE, USER_LOGIN, USER_LOGOUT, POSTS_UPDATE } from "./actions";
 
 const postReducer = (state, action) => {
   switch(action.type){
@@ -12,7 +12,7 @@ const postReducer = (state, action) => {
         ...state,
         data: state.data.filter(post => post.id !== action.payload)
       }
-    case "POSTS_UPDATE":
+    case POSTS_UPDATE:
         return{
             ...state,
             data: action.payload

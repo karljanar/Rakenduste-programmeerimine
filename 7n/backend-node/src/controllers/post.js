@@ -1,23 +1,20 @@
 const Post = require('../models/Post');
-const User = require('../models/User');
-const { ObjectID } = require('mongodb');
+
+
 
 
 exports.getPosts = async (req, res) => {
-  const posts = await Post.find({})
-  
+  const posts = await Post.find({}).populate('user');
   res.status(200).send(posts)
 }
 
 exports.createPost = async function (req, res) {
-
   const newPost = {
     body: req.body.body,
-    userId: req.body.userId
+    user: req.body.user
   }
 
   const createdPost = new Post(newPost)
-
   const savedPost = createdPost.save()
 
   res.status(200).send(`Saved ${createdPost}`)
@@ -25,15 +22,10 @@ exports.createPost = async function (req, res) {
 
 exports.updatePost = async (req, res) => {
   const { id } = req.params.id;
-  var quality = req.body.quality;
-  if(req.body.quality > 100){
-    quality = 100;
-  }
+  
   const newPost = {
-    name: req.body.name,
-    quality: quality,
-    unused: req.body.unused,
-    color: req.body.color
+    body: req.body.body,
+    user: req.body.user
   }
 
   const originalPost = await Post.findByIdAndUpdate(id, newPost);

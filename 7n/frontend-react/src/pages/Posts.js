@@ -1,10 +1,7 @@
-import { useContext, useState, useRef, useEffect } from "react"
-import { Context } from "../store"
-import { addPost, removePost, updatePosts } from "../store/actions"
-import { Form, Input, Button } from 'antd';
-import { DeleteFilled } from '@ant-design/icons';
+import {  useState, useRef, useEffect } from "react"
+import { Form, Input, Button, Table, Space } from 'antd';
 
-function Posts(){
+function Posts(props){
   const [postBody, setPostBody] = useState("");
   const inputRef = useRef(null);
   const [form] = Form.useForm();
@@ -17,16 +14,13 @@ function Posts(){
       console.log(res)
         return res.json();
     }).then((data) => {
-        console.log(data);
         setIsLoading(false);
         setLoadedPost(data);
     });
   },[postLength]);
 
-
-
   function removePost(id){
-    const userId = "6182d9721810c99d4629f315";
+    
     fetch(`http://localhost:8081/api/post/delete/${encodeURIComponent(id)}`, {
       method: 'DELETE',
     });
@@ -37,16 +31,13 @@ function Posts(){
   const handleSubmit = e => {
       addNewPost();
       form.resetFields();
-
       }
 
-
-
   const addNewPost = () => {
-
+    
     const newPost = {
       body: postBody,
-      user: "6182d9721810c99d4629f315"
+      user: props.user.id
     }
     console.log(JSON.stringify(newPost));
     fetch('http://localhost:8081/api/post/create', {
@@ -56,41 +47,61 @@ function Posts(){
     } ).then(res => {
     console.log(res)
     setPostLength(postLength + 1)
-      // return res.json();
     })
     }
   
   if(isLoading){
     return(
-        <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        <div>Loading...</div>
     );
   }
+  
+  const { Column } = Table;
 
   return (
     <div style={{ textAlign: "center" }}>
-    <Form
-      form = {form}
-      onFinish={handleSubmit}>
-      <Form.Item
-        name="Post"
-        rules={[{ required: true, message: 'This field is required!' }]}
-      >
-      <Input 
-        placeholder="Post" 
-        ref={inputRef} type="text" 
-        value={postBody} 
-        onChange={e => setPostBody(e.target.value)} />
-    </Form.Item>
-    <Form.Item>
-      <Button type="primary" htmlType="submit">
-        Tra toota nuud
-      </Button>
-    </Form.Item>
-  </Form>
-      { loadedPosts.map(e => <li key={e._id}>{e._id} {e.body} | Posted by:   
-      <span style={{cursor: "pointer" }} onClick={() => removePost(e._id)}
-        ><DeleteFilled /> tra vardjas ei toota ju
-      </span></li>) }
+      <Form
+        form = {form}
+        onFinish={handleSubmit}>
+        <Form.Item
+          name="Post"
+          rules={[{ required: true, message: 'This field is required!' }]}
+        >
+        <Input 
+          placeholder="Post" 
+          ref={inputRef} type="text" 
+          value={postBody} 
+          onChange={e => setPostBody(e.target.value)} />
+        </Form.Item>
+        <Form.Item>
+          {props.user ?
+          <Button type="primary" htmlType="submit">
+            Post
+          </Button> : <p>You need to log in before posting</p> 
+          }
+        </Form.Item>
+        </Form>
+      <Table dataSource={loadedPosts}>
+        <Column title="Post ID" dataIndex="_id" key="_id" />
+        <Column title="Post" dataIndex="body" key="body" />
+        <Column title="Created At" dataIndex="createdAt" key="createdAt" />
+        <Column
+          title="Created By"
+          key="action"
+          render={(text, record) => (
+            <Space size="middle">
+              <p>{record.user.email}</p>
+            </Space>
+          )}
+        />
+        <Column title="Delete" key="delete" render={(text, record) => (
+        <Space size="middle">
+          <Button type="primary" danger onClick={() => removePost(record._id)}>
+            Delete
+          </Button>
+        </Space>
+      )} />
+      </Table>
     </div>
   )
 }

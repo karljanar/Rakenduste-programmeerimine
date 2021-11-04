@@ -4,8 +4,6 @@ const User = require('../models/User')
 
 exports.login = async (req, res) => {
     const {email, password} = req.body
-    console.log('-----------')
-    console.log(email)
     try {
         const user = await User.findOne({email})
         if(!user) throw Error("User not found")
@@ -23,7 +21,7 @@ exports.login = async (req, res) => {
         const token = jwt.sign(userTemplate, process.env.JWT_SECRET)
         if(!token) throw Error("Something critical happened 3")
 
-        res.status(200).json({
+        res.send({
             token,
             ...userTemplate
         })
@@ -36,7 +34,7 @@ exports.login = async (req, res) => {
 
 exports.signup = async (req, res) => {
     const { firstName, lastName, email, password} = req.body
-
+    console.log(req.body);
     try{
         const user = await User.findOne({email})
 

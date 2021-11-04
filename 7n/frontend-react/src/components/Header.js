@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import 'antd/dist/antd.css';
 import '../index.css';
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu } from 'antd';
 import { NavLink } from 'react-router-dom';
 
 
-function Header(){
+function Header(props){
     const {Header} = Layout;
     return(
         <Layout className="layout">
@@ -17,6 +17,9 @@ function Header(){
               <Menu.Item><NavLink to="/">Posts</NavLink></Menu.Item>
               <Menu.Item><NavLink to="/login">Login</NavLink></Menu.Item>
               <Menu.Item><NavLink to="/register">Register</NavLink></Menu.Item>
+              {props.user ?
+              <Menu.Item>Logged in as: { props.user.firstName }</Menu.Item> :
+              <Menu.Item>Not logged in</Menu.Item>}
             </Menu>
           </Header>
         </Layout>

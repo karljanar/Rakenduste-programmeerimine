@@ -2,6 +2,7 @@
 export const POST_ADD = "POST_ADD"
 export const POST_REMOVE = "POST_REMOVE"
 export const USER_LOGIN = "USER_LOGIN"
+export const POSTS_UPDATE = "POSTS_UPDATE"
 export const USER_LOGOUT = "USER_LOGOUT"
 
 export const addPost = post => ({
@@ -15,7 +16,7 @@ export const removePost = id => ({
 })
 
 export const updatePosts = array => ({
-    type: "POSTS_UPDATE",
+    type: POSTS_UPDATE,
     payload: array
 })
 
