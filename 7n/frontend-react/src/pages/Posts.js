@@ -77,8 +77,8 @@ function Posts(props){
           </Button> : <p>You need to log in before posting</p> 
           }
         </Form.Item>
-        </Form>
-      <Table dataSource={loadedPosts}>
+      </Form>
+      <Table dataSource={loadedPosts} pagination={false} scroll={{ y: 240 }}>
         <Column title="Post ID" dataIndex="_id" key="_id" />
         <Column title="Post" dataIndex="body" key="body" />
         <Column title="Created At" dataIndex="createdAt" key="createdAt" />
@@ -86,8 +86,10 @@ function Posts(props){
           title="Created By"
           key="action"
           render={(text, record) => (
-            <Space size="middle">
-              <p>{record.user.email}</p>
+            <Space size="middle">{ record.user ?
+              <p>{record.user.email}</p> :
+              <p>----</p>
+            }
             </Space>
           )}
         />
@@ -97,7 +99,7 @@ function Posts(props){
             Delete
           </Button>
         </Space>
-      )} />
+        )} />
       </Table>
     </div>
   )

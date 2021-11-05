@@ -33,15 +33,16 @@ function ShowMagic() {
         setShow={setShow}
       />
       <hr />
-      <Greeting name="Janar"/>
+      <Greeting name="Janar" age={21}/>
+      <Greeting />
       {/* Kodutöö osa */}
       <hr />
-      <Squared type="ruutu"/>
-      <Colors textColor="red" />
-      <Colors textColor="green" />
-      <Colors textColor="blue" />
-      <Colors textColor="black" />
-      <Colors textColor="violet" />
+        <Squared type="ruutu"/>
+        <Colors textColor="red" />
+        <Colors textColor="green" />
+        <Colors textColor="blue" />
+        <Colors textColor="black" />
+        <Colors textColor="violet" />
       <hr />
     </div>
   );
